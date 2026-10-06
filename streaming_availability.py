@@ -1,4 +1,8 @@
 """
+TODO: I think I need to set this up so when it's started it takes in a few parameters:
+- multi_turn: if that's set to False, then set state["end_conversation"] to True by default.
+- show_thinking: if that's set to False, then don't print the `thinking` string, only the final content.
+- show_tool_calls: if that's set to False, then only print the `content` if there are no tool calls. Is that right?
 TMDB API Documentation: https://developer.themoviedb.org/reference/getting-started
 """
 import os
@@ -80,41 +84,49 @@ def get_streaming_providers(tmdb_id: str, media_type: str) -> list[str]:
     results = providers.get("results", {"US": ["Error: No results found."]})
     return results.get(country, ["Error: No results for given country."])
 
+def end_conversation() -> None:
+    """Invoke to end the current conversation only if the user says they are done or says good bye."""
+    state["end_conversation"] = True
+
 available_functions = {
   'query_tmdb_id_by_title': query_tmdb_id_by_title,
   'get_streaming_providers': get_streaming_providers,
 }
 
 
-
+state = {"end_conversation": False}
 print("How can I help you?")
-message = input()
 
 system_prompt = Path("prompts/streaming_availability_system_prompt.md").read_text(encoding="utf-8")
 
 messages = [
     {'role': 'system', 'content': system_prompt},
-    {'role': 'user', 'content': message}
     ]
+
 while True:
-    response: ChatResponse = chat(
-        model='qwen3:4b',
-        messages=messages,
-        tools=[query_tmdb_id_by_title, get_streaming_providers],
-        think=True,
-    )
-    messages.append(response.message)
-    print("Thinking: ", response.message.thinking)
-    print("Content: ", response.message.content)
-    if response.message.tool_calls:
-        for tc in response.message.tool_calls:
-            if tc.function.name in available_functions:
-                print(f"Calling {tc.function.name} with arguments {tc.function.arguments}")
-                result = available_functions[tc.function.name](**tc.function.arguments)
-                print(f"Result: {result}")
-                # add the tool result to the messages
-                messages.append({'role': 'tool', 'tool_name': tc.function.name, 'content': str(result)})
-    else:
-        # end the loop when there are no more tool calls
+    user_message = input("User Input: ")
+    messages.append({'role': 'user', 'content': user_message})
+    while True:
+        response: ChatResponse = chat(
+            model='qwen3:4b',
+            messages=messages,
+            tools=[query_tmdb_id_by_title, get_streaming_providers],
+            think=True,
+        )
+        messages.append(response.message)
+        print("Thinking: ", response.message.thinking)
+        print("Content: ", response.message.content)
+        if response.message.tool_calls:
+            for tc in response.message.tool_calls:
+                if tc.function.name in available_functions:
+                    print(f"Calling {tc.function.name} with arguments {tc.function.arguments}")
+                    result = available_functions[tc.function.name](**tc.function.arguments)
+                    print(f"Result: {result}")
+                    # add the tool result to the messages
+                    messages.append({'role': 'tool', 'tool_name': tc.function.name, 'content': str(result)})
+        else:
+            # end the loop when there are no more tool calls
+            break
+      # continue the loop with the updated messages
+    if state["end_conversation"]:
         break
-  # continue the loop with the updated messages
