@@ -17,7 +17,9 @@ tmdb.API_KEY = key
 parser = argparse.ArgumentParser(
     description="Local LLM agent for finding where to stream movies and TV shows.",
 )
+parser.add_argument("-u", "--utterance", type=str, help="the first user utterance to pass to the agent")
 parser.add_argument("-m", "--multi_turn", action="store_true", help="enable multi-turn conversations")
+parser.add_argument("-d", "--disable_grounding", action="store_true", help="disable tools used for searching TMDB")
 parser.add_argument("-t", "--show_thinking", action="store_true", help="show model's chain of thought before response")
 parser.add_argument("-tool", "--show_tool_calls", action="store_true", help="show tool calls and results")
 
@@ -27,6 +29,7 @@ state = {
     "end_conversation": not args.multi_turn,
     "show_thinking": args.show_thinking,
     "show_tool_calls": args.show_tool_calls,
+    "turn": 0,
     }
 
 def query_tmdb_id_by_title(title: str) -> list[dict]:
@@ -108,9 +111,16 @@ available_functions = {
 }
 
 def main() -> list[dict]:
-    print("\nHow can I help you?")
+    if args.disable_grounding:
+        tools = [end_conversation]
+        system_prompt = Path("prompts/system_prompt_no_tools.md").read_text(encoding="utf-8")
+    else:
+        tools = [query_tmdb_id_by_title, get_streaming_providers, end_conversation]
+        system_prompt = Path("prompts/system_prompt_with_tools.md").read_text(encoding="utf-8")
 
-    system_prompt = Path("prompts/streaming_availability_system_prompt.md").read_text(encoding="utf-8")
+    print(f"!!! system prompt: {system_prompt} !!!")
+
+    print("\nHow can I help you?")
 
     messages = [
         {'role': 'system', 'content': system_prompt},
@@ -118,14 +128,18 @@ def main() -> list[dict]:
 
     while True:
         print("")
-        user_message = input("User Input: ")
+        if state["turn"] == 0 and args.utterance:
+            user_message = args.utterance
+            print(f"User Input: {user_message}")
+        else:        
+            user_message = input("User Input: ")
         print("\n===========\n")
         messages.append({'role': 'user', 'content': user_message})
         while True:
             response: ChatResponse = chat(
                 model='qwen3:4b',
                 messages=messages,
-                tools=[query_tmdb_id_by_title, get_streaming_providers, end_conversation],
+                tools=tools,
                 think=True,
             )
             messages.append(response.message)
@@ -154,6 +168,7 @@ def main() -> list[dict]:
                         # add the tool result to the messages
                         messages.append({'role': 'tool', 'tool_name': tc.function.name, 'content': str(result)})
             else:
+                state["turn"] += 1
                 # end the loop when there are no more tool calls
                 break
           # continue the loop with the updated messages
