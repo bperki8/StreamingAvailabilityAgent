@@ -14,23 +14,34 @@ load_dotenv()
 key = os.environ.get("API_KEY", "")
 tmdb.API_KEY = key
 
-parser = argparse.ArgumentParser(
-    description="Local LLM agent for finding where to stream movies and TV shows.",
-)
-parser.add_argument("-u", "--utterance", type=str, help="the first user utterance to pass to the agent")
-parser.add_argument("-m", "--multi_turn", action="store_true", help="enable multi-turn conversations")
-parser.add_argument("-d", "--disable_grounding", action="store_true", help="disable tools used for searching TMDB")
-parser.add_argument("-t", "--show_thinking", action="store_true", help="show model's chain of thought before response")
-parser.add_argument("-tool", "--show_tool_calls", action="store_true", help="show tool calls and results")
-
-args = parser.parse_args()
-
 state = {
-    "end_conversation": not args.multi_turn,
-    "show_thinking": args.show_thinking,
-    "show_tool_calls": args.show_tool_calls,
+    "end_conversation": True,
+    "show_thinking": False,
+    "show_tool_calls": False,
     "turn": 0,
     }
+
+def parse_args(args_list=None):
+    parser = argparse.ArgumentParser(
+        description="Local LLM agent for finding where to stream movies and TV shows.",
+    )
+    parser.add_argument("-u", "--utterance", type=str, help="the first user utterance to pass to the agent")
+    parser.add_argument("-m", "--multi_turn", action="store_true", help="enable multi-turn conversations")
+    parser.add_argument("-d", "--disable_grounding", action="store_true", help="disable tools used for searching TMDB")
+    parser.add_argument("-t", "--show_thinking", action="store_true", help="show model's chain of thought before response")
+    parser.add_argument("-tool", "--show_tool_calls", action="store_true", help="show tool calls and results")
+
+    args = parser.parse_args(args_list)
+
+    state["end_conversation"] = not args.multi_turn
+    state["show_thinking"] = args.show_thinking
+    state["show_tool_calls"] = args.show_tool_calls
+
+    return args
+
+def restore_state_defaults(args):
+    state["turn"] = 0
+    state["end_conversation"] = not args.multi_turn
 
 def query_tmdb_id_by_title(title: str) -> list[dict]:
     """Query for the TMDB ID of TV shows or movies that lexically match the given `title`.
@@ -110,15 +121,15 @@ available_functions = {
   'end_conversation': end_conversation,
 }
 
-def main() -> list[dict]:
+def main(args_list=None) -> list[dict]:
+    args = parse_args(args_list)
+
     if args.disable_grounding:
         tools = [end_conversation]
         system_prompt = Path("prompts/system_prompt_no_tools.md").read_text(encoding="utf-8")
     else:
         tools = [query_tmdb_id_by_title, get_streaming_providers, end_conversation]
         system_prompt = Path("prompts/system_prompt_with_tools.md").read_text(encoding="utf-8")
-
-    print(f"!!! system prompt: {system_prompt} !!!")
 
     print("\nHow can I help you?")
 
@@ -173,7 +184,8 @@ def main() -> list[dict]:
                 break
           # continue the loop with the updated messages
         if state["end_conversation"]:
+            restore_state_defaults(args=args)
             return messages
 
-
-main()
+if __name__ == "__main__":
+    main()
