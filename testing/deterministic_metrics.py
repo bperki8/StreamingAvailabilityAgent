@@ -18,13 +18,13 @@ def conclusion_string(p_value, alpha=0.05) -> str:
 
 start_time = datetime.now()
 
-input_file = "testing/results.tsv"
-output_file = "testing/deterministic_metrics.tsv"
-scorecard_file = "testing/scorecard.tsv"
+# TODO: Get the result file name from the user.
+results_file = "testing/results/example_experiment.tsv"
+scorecard_file = "testing/scorecards/example_experiment.tsv"
 
 modified_rows = []
 
-with open(input_file, mode='r', encoding='utf-8', newline='') as infile:
+with open(results_file, mode='r', encoding='utf-8', newline='') as infile:
     reader = csv.reader(infile, delimiter='\t')
     
     header = next(reader)
@@ -94,7 +94,7 @@ with open(input_file, mode='r', encoding='utf-8', newline='') as infile:
 
     
 
-with open(output_file, mode='w', encoding='utf-8', newline='') as outfile:
+with open(results_file, mode='w', encoding='utf-8', newline='') as outfile:
     writer = csv.writer(outfile, delimiter='\t')
     writer.writerows(modified_rows)
 
@@ -161,10 +161,10 @@ print(f"!!! end time = {end_time} !!!")
 print(f"!!! elapsed time = {end_time - start_time}")
 
 # TODO: Enable this when run in verbose mode?
-# with open(output_file, mode='r', encoding='utf-8', newline='') as outfile:
-#     reader = csv.reader(outfile, delimiter='\t')
-#     print("!!! output file formatting !!!")
-#     for row in reader:
-#         print("!!! here's a row, bit by bit !!!")
-#         for item in row:
-#             print(item)
+with open(results_file, mode='r', encoding='utf-8', newline='') as outfile:
+    reader = csv.reader(outfile, delimiter='\t')
+    print("!!! output file formatting !!!")
+    for row in reader:
+        print("!!! here's a row, bit by bit !!!")
+        for item in row:
+            print(item)

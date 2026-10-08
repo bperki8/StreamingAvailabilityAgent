@@ -30,6 +30,7 @@ def parse_args(args_list=None):
     parser.add_argument("-d", "--disable_grounding", action="store_true", help="disable tools used for searching TMDB")
     parser.add_argument("-t", "--show_thinking", action="store_true", help="show model's chain of thought before response")
     parser.add_argument("-tool", "--show_tool_calls", action="store_true", help="show tool calls and results")
+    parser.add_argument("-sp", "--system_prompt", type=str, help="path to the system prompt", default="prompts/system_prompt_with_tools.md")
 
     args = parser.parse_args(args_list)
 
@@ -128,10 +129,12 @@ def main(args_list=None) -> list[dict]:
 
     if args.disable_grounding:
         tools = [end_conversation]
-        system_prompt = Path("prompts/system_prompt_no_tools.md").read_text(encoding="utf-8")
     else:
         tools = [query_tmdb_id_by_title, get_streaming_providers, end_conversation]
-        system_prompt = Path("prompts/system_prompt_with_tools.md").read_text(encoding="utf-8")
+
+    system_prompt = Path(args.system_prompt).read_text(encoding='utf-8')
+
+    print(f"!!! system prompt : {system_prompt} !!!\n\n")
 
     print("\nHow can I help you?")
 
