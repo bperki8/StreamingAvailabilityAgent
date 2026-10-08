@@ -1,0 +1,23 @@
+{
+    "link": "https://www.themoviedb.org/tv/2352-the-nanny/watch?locale=US",
+    "flatrate": [
+        {
+            "logo_path": "/gMZdpavHmxFNnLpMHwVxfqeux2g.png",
+            "provider_id": 9,
+            "provider_name": "Amazon Prime Video",
+            "display_priority": 3
+        },
+        {
+            "logo_path": "/44uAnmSqvA4yBOdbPWN8YgQHjWm.png",
+            "provider_id": 15,
+            "provider_name": "Hulu",
+            "display_priority": 6
+        },
+        {
+            "logo_path": "/tpwTT1FpWqLLhxUfAuDavIXDDfI.png",
+            "provider_id": 2100,
+            "provider_name": "Amazon Prime Video with Ads",
+            "display_priority": 201
+        }
+    ]
+}

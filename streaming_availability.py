@@ -3,6 +3,8 @@ TMDB API Documentation: https://developer.themoviedb.org/reference/getting-start
 """
 import os
 import argparse
+import hashlib
+import json
 import tmdbsimple as tmdb
 
 from ollama import chat, ChatResponse
@@ -14,12 +16,26 @@ load_dotenv()
 key = os.environ.get("API_KEY", "")
 tmdb.API_KEY = key
 
+cache_directory = "./_cache"
+
 state = {
     "end_conversation": True,
     "show_thinking": False,
     "show_tool_calls": False,
     "turn": 0,
     }
+
+def get_request_hash(function_name: str, params: dict = None) -> str:
+    """Creates a unique SHA-256 hash key for the API request."""
+    request_signature = {
+        "function_name": function_name,
+        "params": params or {},
+    }
+
+    # Sort keys to ensure consistent hashing regardless of dictionary order
+    serialized = json.dumps(request_signature, sort_keys=True)
+    
+    return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
 
 def parse_args(args_list=None):
     parser = argparse.ArgumentParser(
@@ -44,38 +60,53 @@ def restore_state_defaults(args):
     state["turn"] = 0
     state["end_conversation"] = not args.multi_turn
 
-
 def query_tmdb_id_by_title(title: str) -> list[dict]:
-    """Query for the TMDB ID of TV shows or movies that lexically match the given `title`.
+    """Query for the TMDB ID of TV shows or movies that lexically match the given `title`. Uses a cache, because this is just for testing.
 
     :param title: Query used for lexical matching on the titles of TV shows and movies.
     :returns: A list of results with information about the original air/release date, an overview of the media, and the TMDB id.
-    TODO: Cache results.
     """
+    os.makedirs(cache_directory, exist_ok=True)
+    params = { "title": title }
+    file_hash = get_request_hash("query_tmdb_id_by_title", params)
+    file_path = os.path.join(cache_directory, f"{file_hash}.json")
+
+    # Check if cached response exists
+    if os.path.exists(file_path):
+        print("Loading `query_tmdb_id_by_title` call from local cache...")
+        with open(file_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+
+    # If not cached, make the live API request
+    print("Fetching live data for `query_tmdb_id_by_title`...")
     search = tmdb.Search()
     response = search.multi(query=title)
 
     if not response["results"]:
-        return {
+        matches = {
             "query": title,
             "error": "No movie or TV show found matching that query."
         }
+    else:
+        results = response["results"]
 
-    results = response["results"]
+        matches = [
+            {
+                "name": get_name(match),
+                "id": match.get("id", ""),
+                "media_type": match.get("media_type", ""),
+                "overview": match.get("overview", ""),
+                "first_air_date": match.get("first_air_date", ""),
+                "release_date": match.get("release_date", ""),
+                "origin_country": match.get("origin_country", ""),
+                "original_language": match.get("original_language", "")
+            } for match in results
+        ]
 
-    matches = [
-        {
-            "name": get_name(match),
-            "id": match.get("id", ""),
-            "media_type": match.get("media_type", ""),
-            "overview": match.get("overview", ""),
-            "first_air_date": match.get("first_air_date", ""),
-            "release_date": match.get("release_date", ""),
-            "origin_country": match.get("origin_country", ""),
-            "original_language": match.get("original_language", "")
-        } for match in results
-    ]
-
+    # Save the response data locally
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(matches, f, indent=4)
+    
     return matches
 
 def get_name(result: dict) -> str:
@@ -92,6 +123,20 @@ def get_streaming_providers(tmdb_id: str, media_type: str) -> list[str]:
     piece of media.
     TODO: Cache results.
     """
+
+    os.makedirs(cache_directory, exist_ok=True)
+    params = { "tmdb_id": tmdb_id, "media_type": media_type }
+    file_hash = get_request_hash("get_streaming_providers", params)
+    file_path = os.path.join(cache_directory, f"{file_hash}.json")
+
+    # Check if cached response exists
+    if os.path.exists(file_path):
+        print("Loading `get_streaming_providers` call from local cache...")
+        with open(file_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+
+    # If not cached, make the live API request
+    print("Fetching live data for `get_streaming_providers`...")
 
     # TODO: Currently just looking at the "US", but could set the country per query.s
     country = "US"
@@ -112,7 +157,13 @@ def get_streaming_providers(tmdb_id: str, media_type: str) -> list[str]:
         providers = {"results": {"US": ["Error: Unknown media_type. No streaming providers found."]}}
 
     results = providers.get("results", {"US": ["Error: No results found."]})
-    return results.get(country, ["Error: No results for given country."])
+    country_results =  results.get(country, ["Error: No results for given country."])
+
+    # Save the response data locally
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(country_results, f, indent=4)
+
+    return country_results
 
 def end_conversation() -> None:
     """Invoke to end the current conversation only if the user says they are done or says good bye.
