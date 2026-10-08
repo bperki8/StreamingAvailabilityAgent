@@ -48,6 +48,7 @@ def query_tmdb_id_by_title(title: str) -> list[dict]:
 
     :param title: Query used for lexical matching on the titles of TV shows and movies.
     :returns: A list of results with information about the original air/release date, an overview of the media, and the TMDB id.
+    TODO: Cache results.
     """
     search = tmdb.Search()
     response = search.multi(query=title)
@@ -87,6 +88,7 @@ def get_streaming_providers(tmdb_id: str, media_type: str) -> list[str]:
     to find this value for a given show or movie.
     :param media_type: Accepted values include "movie" or "tv". Use `query_tmdb_id_by_title` to find this information for a given
     piece of media.
+    TODO: Cache results.
     """
 
     # TODO: Currently just looking at the "US", but could set the country per query.s

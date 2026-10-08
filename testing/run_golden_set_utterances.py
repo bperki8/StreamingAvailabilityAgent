@@ -44,10 +44,10 @@ print(f"!!! end time = {end_time} !!!")
 print(f"!!! elapsed time = {end_time - start_time}")
 
 # TODO: Enable this when run in verbose mode?
-with open(output_file, mode='r', encoding='utf-8', newline='') as outfile:
-    reader = csv.reader(outfile, delimiter='\t')
-    print("!!! output file formatting !!!")
-    for row in reader:
-        print("!!! here's a row, bit by bit !!!")
-        for item in row:
-            print(item)
+# with open(output_file, mode='r', encoding='utf-8', newline='') as outfile:
+#     reader = csv.reader(outfile, delimiter='\t')
+#     print("!!! output file formatting !!!")
+#     for row in reader:
+#         print("!!! here's a row, bit by bit !!!")
+#         for item in row:
+#             print(item)
