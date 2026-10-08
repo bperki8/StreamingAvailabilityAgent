@@ -1,4 +1,5 @@
 {
+  "experiment_name": "Ungrounded v. Grounded",
   "control_args": ["-d", "-sp", "prompts/system_prompt_no_tools.md"],
   "treatment_args": []
 }

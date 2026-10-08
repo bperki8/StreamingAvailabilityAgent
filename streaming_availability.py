@@ -44,6 +44,7 @@ def restore_state_defaults(args):
     state["turn"] = 0
     state["end_conversation"] = not args.multi_turn
 
+
 def query_tmdb_id_by_title(title: str) -> list[dict]:
     """Query for the TMDB ID of TV shows or movies that lexically match the given `title`.
 
