@@ -2,7 +2,6 @@
 TMDB API Documentation: https://developer.themoviedb.org/reference/getting-started
 """
 import os
-import argparse
 import hashlib
 import json
 import tmdbsimple as tmdb
@@ -22,8 +21,6 @@ cache_directory = "./_cache"
 
 state = {
     "end_conversation": True,
-    "show_thinking": False,
-    "show_tool_calls": False,
     "disable_cached_data": False,
     "turn": 0,
     }
@@ -40,30 +37,22 @@ def get_request_hash(function_name: str, params: dict = None) -> str:
     
     return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
 
-def parse_args(args_list=None):
-    parser = argparse.ArgumentParser(
-        description="Local LLM agent for finding where to stream movies and TV shows.",
-    )
-    parser.add_argument("-u", "--utterance", type=str, help="the first user utterance to pass to the agent")
-    parser.add_argument("-m", "--multi_turn", action="store_true", help="enable multi-turn conversations")
-    parser.add_argument("-d", "--disable_grounding", action="store_true", help="disable tools used for searching TMDB")
-    parser.add_argument("-t", "--show_thinking", action="store_true", help="show model's chain of thought before response")
-    parser.add_argument("-dcd", "--disable_cached_data", action="store_true", help="disable data caching from the TMDB api")
-    parser.add_argument("-tool", "--show_tool_calls", action="store_true", help="show tool calls and results")
-    parser.add_argument("-sp", "--system_prompt", type=str, help="path to the system prompt", default="prompts/system_prompt_with_tools.md")
+def parse_config(config_overrides={}) -> dict:
+    with open("config/agent_config.json", mode='r', encoding='utf-8', newline='') as configfile:
+        config = json.load(configfile)
 
-    args = parser.parse_args(args_list)
+    for key, value in config_overrides.items():
+        config[key] = value
 
-    state["end_conversation"] = not args.multi_turn
-    state["show_thinking"] = args.show_thinking
-    state["show_tool_calls"] = args.show_tool_calls
-    state["disable_cached_data"] = args.disable_cached_data
+    state["end_conversation"] = not config["multi_turn"]
+    state["disable_cached_data"] = config["disable_cached_data"]
 
-    return args
+    return config
 
-def restore_state_defaults(args):
+def restore_state_defaults(config: dict):
     state["turn"] = 0
-    state["end_conversation"] = not args.multi_turn
+    print("!!! turn reset !!!")
+    state["end_conversation"] = not config["multi_turn"]
 
 def query_tmdb_id_by_title(title: str) -> list[dict]:
     """Query for the TMDB ID of TV shows or movies that lexically match the given `title`. Uses a cache, because this is just for testing.
@@ -181,18 +170,20 @@ available_functions = {
   'end_conversation': end_conversation,
 }
 
-def main(args_list=None) -> list[dict]:
-    args = parse_args(args_list)
+def main(config_overrides={}, utterance=None) -> list[dict]:
+    config = parse_config(config_overrides=config_overrides)
 
-    if args.disable_grounding:
+    print(f"!!! config = {config} !!!")
+
+    if config["disable_grounding"]:
         tools = [end_conversation]
     else:
         tools = [query_tmdb_id_by_title, get_streaming_providers, end_conversation]
 
-    system_prompt = Path(args.system_prompt).read_text(encoding='utf-8')
+    system_prompt = Path(config["system_prompt"]).read_text(encoding='utf-8')
 
-    print(f"!!! system prompt : {system_prompt} !!!\n\n")
-
+    if config["verbose"]:
+        print(f"!!! system prompt : {system_prompt} !!!\n\n")
     print("\nHow can I help you?")
 
     messages = [
@@ -201,8 +192,8 @@ def main(args_list=None) -> list[dict]:
 
     while True:
         print("")
-        if state["turn"] == 0 and args.utterance:
-            user_message = args.utterance
+        if state["turn"] == 0 and utterance:
+            user_message = utterance
             print(f"User Input: {user_message}")
         else:        
             user_message = input("User Input: ")
@@ -216,7 +207,7 @@ def main(args_list=None) -> list[dict]:
                 think=True,
             )
             messages.append(response.message)
-            if state["show_thinking"]:
+            if config["show_thinking"]:
                 print("\nChain of Thought: \n\n", response.message.thinking)
                 print("\n===========\n")
             else:
@@ -227,12 +218,12 @@ def main(args_list=None) -> list[dict]:
             if response.message.tool_calls:
                 for tc in response.message.tool_calls:
                     if tc.function.name in available_functions:
-                        if state["show_tool_calls"]:
+                        if config["show_tool_calls"]:
                             print(f"Calling {tc.function.name} with arguments {tc.function.arguments}\n")
                         else:
                             print("Calling tools...")
                         result = available_functions[tc.function.name](**tc.function.arguments)
-                        if state["show_tool_calls"]:
+                        if config["show_tool_calls"]:
                             print(f"Result: \n\n{result}")
                             print("\n===========\n")
                         else:
@@ -246,7 +237,7 @@ def main(args_list=None) -> list[dict]:
                 break
           # continue the loop with the updated messages
         if state["end_conversation"]:
-            restore_state_defaults(args=args)
+            restore_state_defaults(config=config)
             return messages
 
 if __name__ == "__main__":

@@ -1,5 +1,8 @@
 {
   "experiment_name": "Ungrounded v. Grounded w/ Better Prompt",
-  "control_args": ["-d", "-sp", "prompts/system_prompt_no_tools.md"],
-  "treatment_args": ["-sp", "prompts/system_prompt_with_tools_1_0_0.md"]
+  "control_config_overrides": {
+    "disable_grounding": true,
+    "system_prompt": "prompts/system_prompt_no_tools.md"
+  },
+  "treatment_config_overrides": { "system_prompt": "prompts/system_prompt_with_tools_1_0_0.md" }
 }

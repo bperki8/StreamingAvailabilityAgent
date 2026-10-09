@@ -1,0 +1,9 @@
+{
+  "multi_turn": false,
+  "disable_grounding": false,
+  "show_thinking": false,
+  "disable_cached_data": false,
+  "show_tool_calls": false,
+  "verbose": false,
+  "system_prompt": "prompts/system_prompt_with_tools.md"
+}

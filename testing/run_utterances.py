@@ -5,7 +5,6 @@ import streaming_availability
 
 from datetime import datetime
 
-
 start_time = datetime.now()
 
 # TODO: Grab this stuff from the user.
@@ -20,10 +19,10 @@ treatment_args = []
 
 with open(config_file, mode='r', encoding='utf-8', newline='') as configfile:
     config_data = json.load(configfile)
-    control_args = config_data["control_args"]
-    treatment_args = config_data["treatment_args"]
-    print(f"!!! control_args = {control_args} !!!")
-    print(f"!!! treatment_args = {treatment_args} !!!")
+    control_config_overrides = config_data["control_config_overrides"]
+    treatment_config_overrides = config_data["treatment_config_overrides"]
+    print(f"!!! control_config_overrides = {control_config_overrides} !!!")
+    print(f"!!! treatment_config_overrides = {treatment_config_overrides} !!!")
     
 
 with open(dataset_file, mode='r', encoding='utf-8', newline='') as infile:
@@ -39,14 +38,10 @@ with open(dataset_file, mode='r', encoding='utf-8', newline='') as infile:
         user_utterance = row[0]
 
         # TODO: Could run these two in parallel to save time.
-        control_arguments = ["--utterance", user_utterance ]
-        control_arguments.extend(control_args)
-        print(f"!!! control_arguments = {control_arguments} !!!")
-        control_result = streaming_availability.main(control_arguments)
-        treatment_arguments = ["--utterance", user_utterance ]
-        treatment_arguments.extend(treatment_args)
-        print(f"!!! treatment_arguments = {treatment_arguments} !!!")
-        treatment_result = streaming_availability.main(treatment_arguments)
+        print(f"!!! control_config_overrides = {control_config_overrides} !!!")
+        control_result = streaming_availability.main(control_config_overrides, user_utterance)
+        print(f"!!! treatment_config_overrides = {treatment_config_overrides} !!!")
+        treatment_result = streaming_availability.main(treatment_config_overrides, user_utterance)
 
         utterance_urls_providers = row[:3]
         utterance_urls_providers.append(control_result[-1]["content"].encode())
