@@ -11,7 +11,9 @@ from ollama import chat, ChatResponse
 from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv() 
+load_dotenv()
+
+os.environ['OLLAMA_KV_CACHE_TYPE'] = 'q4_0'
 
 key = os.environ.get("API_KEY", "")
 tmdb.API_KEY = key
@@ -22,6 +24,7 @@ state = {
     "end_conversation": True,
     "show_thinking": False,
     "show_tool_calls": False,
+    "disable_cached_data": False,
     "turn": 0,
     }
 
@@ -45,6 +48,7 @@ def parse_args(args_list=None):
     parser.add_argument("-m", "--multi_turn", action="store_true", help="enable multi-turn conversations")
     parser.add_argument("-d", "--disable_grounding", action="store_true", help="disable tools used for searching TMDB")
     parser.add_argument("-t", "--show_thinking", action="store_true", help="show model's chain of thought before response")
+    parser.add_argument("-dcd", "--disable_cached_data", action="store_true", help="disable data caching from the TMDB api")
     parser.add_argument("-tool", "--show_tool_calls", action="store_true", help="show tool calls and results")
     parser.add_argument("-sp", "--system_prompt", type=str, help="path to the system prompt", default="prompts/system_prompt_with_tools.md")
 
@@ -53,6 +57,7 @@ def parse_args(args_list=None):
     state["end_conversation"] = not args.multi_turn
     state["show_thinking"] = args.show_thinking
     state["show_tool_calls"] = args.show_tool_calls
+    state["disable_cached_data"] = args.disable_cached_data
 
     return args
 
@@ -72,7 +77,7 @@ def query_tmdb_id_by_title(title: str) -> list[dict]:
     file_path = os.path.join(cache_directory, f"{file_hash}.json")
 
     # Check if cached response exists
-    if os.path.exists(file_path):
+    if not state["disable_cached_data"] and os.path.exists(file_path):
         print("Loading `query_tmdb_id_by_title` call from local cache...")
         with open(file_path, "r", encoding="utf-8") as f:
             return json.load(f)
@@ -130,7 +135,7 @@ def get_streaming_providers(tmdb_id: str, media_type: str) -> list[str]:
     file_path = os.path.join(cache_directory, f"{file_hash}.json")
 
     # Check if cached response exists
-    if os.path.exists(file_path):
+    if not state["disable_cached_data"] and os.path.exists(file_path):
         print("Loading `get_streaming_providers` call from local cache...")
         with open(file_path, "r", encoding="utf-8") as f:
             return json.load(f)

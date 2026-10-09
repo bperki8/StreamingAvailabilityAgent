@@ -1,0 +1,39 @@
+{
+    "link": "https://www.themoviedb.org/tv/63404-taskmaster/watch?locale=US",
+    "buy": [
+        {
+            "logo_path": "/jn6TLbtaTZntTRX9UYucHJvpQx1.png",
+            "provider_id": 10,
+            "provider_name": "Amazon Video",
+            "display_priority": 8
+        },
+        {
+            "logo_path": "/aZRENwYILujqs0RVOZutTh0BVGV.png",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies",
+            "display_priority": 20
+        }
+    ],
+    "ads": [
+        {
+            "logo_path": "/fN4czqaMQNLeF6sSSIjGbAWzvwK.png",
+            "provider_id": 300,
+            "provider_name": "Pluto TV",
+            "display_priority": 72
+        },
+        {
+            "logo_path": "/gqaJWT5oFiJyVDojVLYRSFPbhQ1.png",
+            "provider_id": 235,
+            "provider_name": "YouTube Free",
+            "display_priority": 95
+        }
+    ],
+    "flatrate": [
+        {
+            "logo_path": "/44uAnmSqvA4yBOdbPWN8YgQHjWm.png",
+            "provider_id": 15,
+            "provider_name": "Hulu",
+            "display_priority": 6
+        }
+    ]
+}

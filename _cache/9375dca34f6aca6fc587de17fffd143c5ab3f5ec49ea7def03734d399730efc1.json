@@ -1,0 +1,67 @@
+{
+    "link": "https://www.themoviedb.org/tv/32726-bob-s-burgers/watch?locale=US",
+    "buy": [
+        {
+            "logo_path": "/jn6TLbtaTZntTRX9UYucHJvpQx1.png",
+            "provider_id": 10,
+            "provider_name": "Amazon Video",
+            "display_priority": 8
+        },
+        {
+            "logo_path": "/qdEGArH3lKfFnAtYXMkSYk5wxuG.png",
+            "provider_id": 2,
+            "provider_name": "Apple TV Store",
+            "display_priority": 9
+        },
+        {
+            "logo_path": "/aZRENwYILujqs0RVOZutTh0BVGV.png",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies",
+            "display_priority": 20
+        },
+        {
+            "logo_path": "/wpOt6x0dRxTrIzuBosto4LGd7E9.png",
+            "provider_id": 7,
+            "provider_name": "Fandango At Home",
+            "display_priority": 37
+        }
+    ],
+    "flatrate": [
+        {
+            "logo_path": "/44uAnmSqvA4yBOdbPWN8YgQHjWm.png",
+            "provider_id": 15,
+            "provider_name": "Hulu",
+            "display_priority": 6
+        },
+        {
+            "logo_path": "/3wF8xISfVlcrc8X3jaa3uMUFGAr.png",
+            "provider_id": 257,
+            "provider_name": "fuboTV",
+            "display_priority": 10
+        },
+        {
+            "logo_path": "/48bVXEIyCLSL9pZUQ7gB9ToyWto.png",
+            "provider_id": 2528,
+            "provider_name": "YouTube TV",
+            "display_priority": 38
+        },
+        {
+            "logo_path": "/a7ZF6Ng3d6KDMylLUMH1OjAeTqW.png",
+            "provider_id": 123,
+            "provider_name": "FXNow",
+            "display_priority": 42
+        },
+        {
+            "logo_path": "/lEboSJfLzmtWaoLsms0jYBxYqka.png",
+            "provider_id": 318,
+            "provider_name": "Adult Swim",
+            "display_priority": 92
+        },
+        {
+            "logo_path": "/b3KR9gzy7QkvLNyNzUROavLpsrq.png",
+            "provider_id": 2554,
+            "provider_name": "FOX One Amazon Channel",
+            "display_priority": 338
+        }
+    ]
+}

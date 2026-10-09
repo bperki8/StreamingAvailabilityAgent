@@ -1,0 +1,125 @@
+{
+    "link": "https://www.themoviedb.org/movie/9476-a-knight-s-tale/watch?locale=US",
+    "rent": [
+        {
+            "logo_path": "/jn6TLbtaTZntTRX9UYucHJvpQx1.png",
+            "provider_id": 10,
+            "provider_name": "Amazon Video",
+            "display_priority": 8
+        },
+        {
+            "logo_path": "/qdEGArH3lKfFnAtYXMkSYk5wxuG.png",
+            "provider_id": 2,
+            "provider_name": "Apple TV Store",
+            "display_priority": 9
+        },
+        {
+            "logo_path": "/aZRENwYILujqs0RVOZutTh0BVGV.png",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies",
+            "display_priority": 20
+        },
+        {
+            "logo_path": "/5Maob4o5w8oZnNeYpCDyVFD3M7X.png",
+            "provider_id": 192,
+            "provider_name": "YouTube",
+            "display_priority": 21
+        },
+        {
+            "logo_path": "/wpOt6x0dRxTrIzuBosto4LGd7E9.png",
+            "provider_id": 7,
+            "provider_name": "Fandango At Home",
+            "display_priority": 37
+        },
+        {
+            "logo_path": "/6qPtM96UZkt3Bu4ZFPsDeHFWUZ2.png",
+            "provider_id": 486,
+            "provider_name": "Spectrum On Demand",
+            "display_priority": 119
+        },
+        {
+            "logo_path": "/blAEhvx3XX8sV0fFVFk88FFjubs.png",
+            "provider_id": 538,
+            "provider_name": "Plex",
+            "display_priority": 124
+        }
+    ],
+    "buy": [
+        {
+            "logo_path": "/jn6TLbtaTZntTRX9UYucHJvpQx1.png",
+            "provider_id": 10,
+            "provider_name": "Amazon Video",
+            "display_priority": 8
+        },
+        {
+            "logo_path": "/qdEGArH3lKfFnAtYXMkSYk5wxuG.png",
+            "provider_id": 2,
+            "provider_name": "Apple TV Store",
+            "display_priority": 9
+        },
+        {
+            "logo_path": "/aZRENwYILujqs0RVOZutTh0BVGV.png",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies",
+            "display_priority": 20
+        },
+        {
+            "logo_path": "/5Maob4o5w8oZnNeYpCDyVFD3M7X.png",
+            "provider_id": 192,
+            "provider_name": "YouTube",
+            "display_priority": 21
+        },
+        {
+            "logo_path": "/wpOt6x0dRxTrIzuBosto4LGd7E9.png",
+            "provider_id": 7,
+            "provider_name": "Fandango At Home",
+            "display_priority": 37
+        }
+    ],
+    "flatrate": [
+        {
+            "logo_path": "/4N4BMd0Mm0kHAmF7RZgL5lW3cwc.png",
+            "provider_id": 2303,
+            "provider_name": "Paramount Plus Premium",
+            "display_priority": 14
+        },
+        {
+            "logo_path": "/uPWQPyF4nqwtfPNmGcFcenU57HG.png",
+            "provider_id": 2616,
+            "provider_name": "Paramount Plus Essential",
+            "display_priority": 15
+        },
+        {
+            "logo_path": "/bxX0YVOCY7bI85BKRlJAAQ2EjUR.png",
+            "provider_id": 582,
+            "provider_name": "Paramount+ Amazon Channel",
+            "display_priority": 26
+        },
+        {
+            "logo_path": "/48bVXEIyCLSL9pZUQ7gB9ToyWto.png",
+            "provider_id": 2528,
+            "provider_name": "YouTube TV",
+            "display_priority": 38
+        },
+        {
+            "logo_path": "/tnZCMxbcKdxuVmjxefyXCaip7q3.png",
+            "provider_id": 633,
+            "provider_name": "Paramount+ Roku Premium Channel",
+            "display_priority": 62
+        },
+        {
+            "logo_path": "/uNyIRlzYb0Hf7Ix6Q3MKms0ERgA.png",
+            "provider_id": 2745,
+            "provider_name": "Sony Pictures Core Amazon Channel",
+            "display_priority": 370
+        }
+    ],
+    "ads": [
+        {
+            "logo_path": "/gqaJWT5oFiJyVDojVLYRSFPbhQ1.png",
+            "provider_id": 235,
+            "provider_name": "YouTube Free",
+            "display_priority": 95
+        }
+    ]
+}

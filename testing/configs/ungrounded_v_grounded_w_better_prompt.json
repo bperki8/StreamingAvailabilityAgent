@@ -1,0 +1,5 @@
+{
+  "experiment_name": "Ungrounded v. Grounded w/ Better Prompt",
+  "control_args": ["-d", "-sp", "prompts/system_prompt_no_tools.md"],
+  "treatment_args": ["-sp", "prompts/system_prompt_with_tools_1_0_0.md"]
+}

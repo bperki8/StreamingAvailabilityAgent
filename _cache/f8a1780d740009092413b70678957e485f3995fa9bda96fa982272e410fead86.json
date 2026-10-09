@@ -1,0 +1,111 @@
+{
+    "link": "https://www.themoviedb.org/movie/664-twister/watch?locale=US",
+    "buy": [
+        {
+            "logo_path": "/jn6TLbtaTZntTRX9UYucHJvpQx1.png",
+            "provider_id": 10,
+            "provider_name": "Amazon Video",
+            "display_priority": 8
+        },
+        {
+            "logo_path": "/qdEGArH3lKfFnAtYXMkSYk5wxuG.png",
+            "provider_id": 2,
+            "provider_name": "Apple TV Store",
+            "display_priority": 9
+        },
+        {
+            "logo_path": "/aZRENwYILujqs0RVOZutTh0BVGV.png",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies",
+            "display_priority": 20
+        },
+        {
+            "logo_path": "/5Maob4o5w8oZnNeYpCDyVFD3M7X.png",
+            "provider_id": 192,
+            "provider_name": "YouTube",
+            "display_priority": 21
+        },
+        {
+            "logo_path": "/wpOt6x0dRxTrIzuBosto4LGd7E9.png",
+            "provider_id": 7,
+            "provider_name": "Fandango At Home",
+            "display_priority": 37
+        }
+    ],
+    "flatrate": [
+        {
+            "logo_path": "/48bVXEIyCLSL9pZUQ7gB9ToyWto.png",
+            "provider_id": 2528,
+            "provider_name": "YouTube TV",
+            "display_priority": 38
+        },
+        {
+            "logo_path": "/6cgMswJ1yXtJLP1uJhM476h2WTH.png",
+            "provider_id": 363,
+            "provider_name": "TNT",
+            "display_priority": 99
+        },
+        {
+            "logo_path": "/8MX4rbkjJUf2NMb2ZVwHq0IATJf.png",
+            "provider_id": 506,
+            "provider_name": "TBS",
+            "display_priority": 115
+        },
+        {
+            "logo_path": "/sksAwn7y5P55CNGZ2znVuwLNM8S.png",
+            "provider_id": 507,
+            "provider_name": "tru TV",
+            "display_priority": 121
+        },
+        {
+            "logo_path": "/dI7GHS1st3jWH8eW21x5YnJdUFN.png",
+            "provider_id": 2754,
+            "provider_name": "Howdy Amazon Channel",
+            "display_priority": 371
+        }
+    ],
+    "rent": [
+        {
+            "logo_path": "/jn6TLbtaTZntTRX9UYucHJvpQx1.png",
+            "provider_id": 10,
+            "provider_name": "Amazon Video",
+            "display_priority": 8
+        },
+        {
+            "logo_path": "/qdEGArH3lKfFnAtYXMkSYk5wxuG.png",
+            "provider_id": 2,
+            "provider_name": "Apple TV Store",
+            "display_priority": 9
+        },
+        {
+            "logo_path": "/aZRENwYILujqs0RVOZutTh0BVGV.png",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies",
+            "display_priority": 20
+        },
+        {
+            "logo_path": "/5Maob4o5w8oZnNeYpCDyVFD3M7X.png",
+            "provider_id": 192,
+            "provider_name": "YouTube",
+            "display_priority": 21
+        },
+        {
+            "logo_path": "/wpOt6x0dRxTrIzuBosto4LGd7E9.png",
+            "provider_id": 7,
+            "provider_name": "Fandango At Home",
+            "display_priority": 37
+        },
+        {
+            "logo_path": "/6qPtM96UZkt3Bu4ZFPsDeHFWUZ2.png",
+            "provider_id": 486,
+            "provider_name": "Spectrum On Demand",
+            "display_priority": 119
+        },
+        {
+            "logo_path": "/blAEhvx3XX8sV0fFVFk88FFjubs.png",
+            "provider_id": 538,
+            "provider_name": "Plex",
+            "display_priority": 124
+        }
+    ]
+}

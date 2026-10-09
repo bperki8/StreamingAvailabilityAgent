@@ -1,0 +1,121 @@
+{
+    "link": "https://www.themoviedb.org/movie/11906-suspiria/watch?locale=US",
+    "flatrate": [
+        {
+            "logo_path": "/mfbhzQwmQKjm7bLZPF5CTeu3Ilc.png",
+            "provider_id": 2383,
+            "provider_name": "Philo",
+            "display_priority": 17
+        },
+        {
+            "logo_path": "/pqV8nzIxmOKVDsDrQ5wCPYuSM5P.png",
+            "provider_id": 199,
+            "provider_name": "Fandor Amazon Channel",
+            "display_priority": 89
+        },
+        {
+            "logo_path": "/zRn4rBGPYDeZvTeZEBySDdqHzS8.png",
+            "provider_id": 202,
+            "provider_name": "Screambox Amazon Channel",
+            "display_priority": 90
+        },
+        {
+            "logo_path": "/uqAgFY1AoqdcsDVLzMCpoQqzJ2u.png",
+            "provider_id": 2367,
+            "provider_name": "Midnight Pulp Amazon Channel",
+            "display_priority": 234
+        }
+    ],
+    "buy": [
+        {
+            "logo_path": "/jn6TLbtaTZntTRX9UYucHJvpQx1.png",
+            "provider_id": 10,
+            "provider_name": "Amazon Video",
+            "display_priority": 8
+        }
+    ],
+    "rent": [
+        {
+            "logo_path": "/jn6TLbtaTZntTRX9UYucHJvpQx1.png",
+            "provider_id": 10,
+            "provider_name": "Amazon Video",
+            "display_priority": 8
+        }
+    ],
+    "free": [
+        {
+            "logo_path": "/cltb8XKan9ierp23ItPmCOcVLRa.png",
+            "provider_id": 191,
+            "provider_name": "Kanopy",
+            "display_priority": 35
+        },
+        {
+            "logo_path": "/gtjNBzAoGgUtYzt0UKXmwG34WWL.png",
+            "provider_id": 212,
+            "provider_name": "Hoopla",
+            "display_priority": 36
+        },
+        {
+            "logo_path": "/ezTsuy3T7Byi7XRbAozgJrsnbQC.png",
+            "provider_id": 2239,
+            "provider_name": "FlixHouse",
+            "display_priority": 43
+        },
+        {
+            "logo_path": "/naf5wQA91UCj0OetKOEYZgWZLqe.png",
+            "provider_id": 2308,
+            "provider_name": "Darkroom",
+            "display_priority": 137
+        },
+        {
+            "logo_path": "/dNF4vWhF3TduWvOyfVxEyTqSNRl.png",
+            "provider_id": 2409,
+            "provider_name": "Fawesome",
+            "display_priority": 143
+        },
+        {
+            "logo_path": "/oMEvAYpfx85D9HHQzXqFbHC0S6F.png",
+            "provider_id": 2667,
+            "provider_name": "YOW.tv",
+            "display_priority": 353
+        }
+    ],
+    "ads": [
+        {
+            "logo_path": "/mfbhzQwmQKjm7bLZPF5CTeu3Ilc.png",
+            "provider_id": 2383,
+            "provider_name": "Philo",
+            "display_priority": 17
+        },
+        {
+            "logo_path": "/b7uhrYJtAe7b1ieJGg705vTbwrX.png",
+            "provider_id": 207,
+            "provider_name": "The Roku Channel",
+            "display_priority": 29
+        },
+        {
+            "logo_path": "/blAEhvx3XX8sV0fFVFk88FFjubs.png",
+            "provider_id": 538,
+            "provider_name": "Plex",
+            "display_priority": 124
+        },
+        {
+            "logo_path": "/1gC0K43JMyMtVpqczxvwBp0pkxn.png",
+            "provider_id": 2077,
+            "provider_name": "Plex Channel",
+            "display_priority": 127
+        },
+        {
+            "logo_path": "/n6E9OeoQicCDd43PnLsMpVIVYFK.png",
+            "provider_id": 1963,
+            "provider_name": "Xumo Play",
+            "display_priority": 166
+        },
+        {
+            "logo_path": "/9dEuvA8wg5TSeFBZlPxSVxFdimJ.png",
+            "provider_id": 73,
+            "provider_name": "Tubi TV",
+            "display_priority": 346
+        }
+    ]
+}

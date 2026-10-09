@@ -1,0 +1,55 @@
+{
+    "link": "https://www.themoviedb.org/tv/18347-community/watch?locale=US",
+    "flatrate": [
+        {
+            "logo_path": "/44uAnmSqvA4yBOdbPWN8YgQHjWm.png",
+            "provider_id": 15,
+            "provider_name": "Hulu",
+            "display_priority": 6
+        },
+        {
+            "logo_path": "/a1UIdq5BrkcAxnxcUhFsNbXnxeu.png",
+            "provider_id": 386,
+            "provider_name": "Peacock Premium",
+            "display_priority": 16
+        },
+        {
+            "logo_path": "/mfbhzQwmQKjm7bLZPF5CTeu3Ilc.png",
+            "provider_id": 2383,
+            "provider_name": "Philo",
+            "display_priority": 17
+        },
+        {
+            "logo_path": "/yrEwyMzEKdqAoGhaWUARtIxByol.png",
+            "provider_id": 387,
+            "provider_name": "Peacock Premium Plus",
+            "display_priority": 213
+        }
+    ],
+    "buy": [
+        {
+            "logo_path": "/jn6TLbtaTZntTRX9UYucHJvpQx1.png",
+            "provider_id": 10,
+            "provider_name": "Amazon Video",
+            "display_priority": 8
+        },
+        {
+            "logo_path": "/qdEGArH3lKfFnAtYXMkSYk5wxuG.png",
+            "provider_id": 2,
+            "provider_name": "Apple TV Store",
+            "display_priority": 9
+        },
+        {
+            "logo_path": "/aZRENwYILujqs0RVOZutTh0BVGV.png",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies",
+            "display_priority": 20
+        },
+        {
+            "logo_path": "/wpOt6x0dRxTrIzuBosto4LGd7E9.png",
+            "provider_id": 7,
+            "provider_name": "Fandango At Home",
+            "display_priority": 37
+        }
+    ]
+}

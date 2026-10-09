@@ -1,0 +1,45 @@
+{
+    "link": "https://www.themoviedb.org/tv/10283-archer/watch?locale=US",
+    "ads": [
+        {
+            "logo_path": "/9dEuvA8wg5TSeFBZlPxSVxFdimJ.png",
+            "provider_id": 73,
+            "provider_name": "Tubi TV",
+            "display_priority": 346
+        }
+    ],
+    "buy": [
+        {
+            "logo_path": "/jn6TLbtaTZntTRX9UYucHJvpQx1.png",
+            "provider_id": 10,
+            "provider_name": "Amazon Video",
+            "display_priority": 8
+        },
+        {
+            "logo_path": "/qdEGArH3lKfFnAtYXMkSYk5wxuG.png",
+            "provider_id": 2,
+            "provider_name": "Apple TV Store",
+            "display_priority": 9
+        },
+        {
+            "logo_path": "/aZRENwYILujqs0RVOZutTh0BVGV.png",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies",
+            "display_priority": 20
+        },
+        {
+            "logo_path": "/wpOt6x0dRxTrIzuBosto4LGd7E9.png",
+            "provider_id": 7,
+            "provider_name": "Fandango At Home",
+            "display_priority": 37
+        }
+    ],
+    "flatrate": [
+        {
+            "logo_path": "/44uAnmSqvA4yBOdbPWN8YgQHjWm.png",
+            "provider_id": 15,
+            "provider_name": "Hulu",
+            "display_priority": 6
+        }
+    ]
+}

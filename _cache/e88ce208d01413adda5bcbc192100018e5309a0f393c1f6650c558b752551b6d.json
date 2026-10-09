@@ -1,0 +1,133 @@
+{
+    "link": "https://www.themoviedb.org/movie/431-cube/watch?locale=US",
+    "rent": [
+        {
+            "logo_path": "/jn6TLbtaTZntTRX9UYucHJvpQx1.png",
+            "provider_id": 10,
+            "provider_name": "Amazon Video",
+            "display_priority": 8
+        },
+        {
+            "logo_path": "/qdEGArH3lKfFnAtYXMkSYk5wxuG.png",
+            "provider_id": 2,
+            "provider_name": "Apple TV Store",
+            "display_priority": 9
+        },
+        {
+            "logo_path": "/aZRENwYILujqs0RVOZutTh0BVGV.png",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies",
+            "display_priority": 20
+        },
+        {
+            "logo_path": "/5Maob4o5w8oZnNeYpCDyVFD3M7X.png",
+            "provider_id": 192,
+            "provider_name": "YouTube",
+            "display_priority": 21
+        },
+        {
+            "logo_path": "/wpOt6x0dRxTrIzuBosto4LGd7E9.png",
+            "provider_id": 7,
+            "provider_name": "Fandango At Home",
+            "display_priority": 37
+        }
+    ],
+    "ads": [
+        {
+            "logo_path": "/wpOt6x0dRxTrIzuBosto4LGd7E9.png",
+            "provider_id": 332,
+            "provider_name": "Fandango at Home Free",
+            "display_priority": 39
+        },
+        {
+            "logo_path": "/blAEhvx3XX8sV0fFVFk88FFjubs.png",
+            "provider_id": 538,
+            "provider_name": "Plex",
+            "display_priority": 124
+        },
+        {
+            "logo_path": "/1gC0K43JMyMtVpqczxvwBp0pkxn.png",
+            "provider_id": 2077,
+            "provider_name": "Plex Channel",
+            "display_priority": 127
+        },
+        {
+            "logo_path": "/n6E9OeoQicCDd43PnLsMpVIVYFK.png",
+            "provider_id": 1963,
+            "provider_name": "Xumo Play",
+            "display_priority": 166
+        },
+        {
+            "logo_path": "/9dEuvA8wg5TSeFBZlPxSVxFdimJ.png",
+            "provider_id": 73,
+            "provider_name": "Tubi TV",
+            "display_priority": 346
+        }
+    ],
+    "flatrate": [
+        {
+            "logo_path": "/3wF8xISfVlcrc8X3jaa3uMUFGAr.png",
+            "provider_id": 257,
+            "provider_name": "fuboTV",
+            "display_priority": 10
+        },
+        {
+            "logo_path": "/dI7GHS1st3jWH8eW21x5YnJdUFN.png",
+            "provider_id": 2754,
+            "provider_name": "Howdy Amazon Channel",
+            "display_priority": 371
+        }
+    ],
+    "buy": [
+        {
+            "logo_path": "/jn6TLbtaTZntTRX9UYucHJvpQx1.png",
+            "provider_id": 10,
+            "provider_name": "Amazon Video",
+            "display_priority": 8
+        },
+        {
+            "logo_path": "/qdEGArH3lKfFnAtYXMkSYk5wxuG.png",
+            "provider_id": 2,
+            "provider_name": "Apple TV Store",
+            "display_priority": 9
+        },
+        {
+            "logo_path": "/aZRENwYILujqs0RVOZutTh0BVGV.png",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies",
+            "display_priority": 20
+        },
+        {
+            "logo_path": "/5Maob4o5w8oZnNeYpCDyVFD3M7X.png",
+            "provider_id": 192,
+            "provider_name": "YouTube",
+            "display_priority": 21
+        },
+        {
+            "logo_path": "/wpOt6x0dRxTrIzuBosto4LGd7E9.png",
+            "provider_id": 7,
+            "provider_name": "Fandango At Home",
+            "display_priority": 37
+        }
+    ],
+    "free": [
+        {
+            "logo_path": "/cltb8XKan9ierp23ItPmCOcVLRa.png",
+            "provider_id": 191,
+            "provider_name": "Kanopy",
+            "display_priority": 35
+        },
+        {
+            "logo_path": "/gtjNBzAoGgUtYzt0UKXmwG34WWL.png",
+            "provider_id": 212,
+            "provider_name": "Hoopla",
+            "display_priority": 36
+        },
+        {
+            "logo_path": "/dNF4vWhF3TduWvOyfVxEyTqSNRl.png",
+            "provider_id": 2409,
+            "provider_name": "Fawesome",
+            "display_priority": 143
+        }
+    ]
+}

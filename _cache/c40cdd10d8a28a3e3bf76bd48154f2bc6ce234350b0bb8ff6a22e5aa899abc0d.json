@@ -1,0 +1,113 @@
+{
+    "link": "https://www.themoviedb.org/tv/1749-how-it-s-made/watch?locale=US",
+    "flatrate": [
+        {
+            "logo_path": "/5eZ872CghnHFLB1j8grszbrx0dx.png",
+            "provider_id": 337,
+            "provider_name": "Disney Plus",
+            "display_priority": 5
+        },
+        {
+            "logo_path": "/44uAnmSqvA4yBOdbPWN8YgQHjWm.png",
+            "provider_id": 15,
+            "provider_name": "Hulu",
+            "display_priority": 6
+        },
+        {
+            "logo_path": "/64fLWeSyZ1KQZhIdvTdy4QHeWty.png",
+            "provider_id": 1825,
+            "provider_name": "HBO Max Amazon Channel",
+            "display_priority": 11
+        },
+        {
+            "logo_path": "/mfbhzQwmQKjm7bLZPF5CTeu3Ilc.png",
+            "provider_id": 2383,
+            "provider_name": "Philo",
+            "display_priority": 17
+        },
+        {
+            "logo_path": "/52htht83nlt2aAobIug88TeiWvO.png",
+            "provider_id": 584,
+            "provider_name": "Discovery+ Amazon Channel",
+            "display_priority": 27
+        },
+        {
+            "logo_path": "/48bVXEIyCLSL9pZUQ7gB9ToyWto.png",
+            "provider_id": 2528,
+            "provider_name": "YouTube TV",
+            "display_priority": 38
+        },
+        {
+            "logo_path": "/ei7TvvGf0rTjRFtZHUZnQ5VICLZ.png",
+            "provider_id": 411,
+            "provider_name": "Science Channel",
+            "display_priority": 107
+        },
+        {
+            "logo_path": "/skypuy7SXuugIQeYg0IglmzoKaS.png",
+            "provider_id": 1899,
+            "provider_name": "HBO Max",
+            "display_priority": 151
+        },
+        {
+            "logo_path": "/tHseJEgZaUdVlLtBpOGmKPfzbQ8.png",
+            "provider_id": 520,
+            "provider_name": "Discovery +",
+            "display_priority": 157
+        }
+    ],
+    "ads": [
+        {
+            "logo_path": "/b7uhrYJtAe7b1ieJGg705vTbwrX.png",
+            "provider_id": 207,
+            "provider_name": "The Roku Channel",
+            "display_priority": 29
+        },
+        {
+            "logo_path": "/blAEhvx3XX8sV0fFVFk88FFjubs.png",
+            "provider_id": 538,
+            "provider_name": "Plex",
+            "display_priority": 124
+        },
+        {
+            "logo_path": "/1gC0K43JMyMtVpqczxvwBp0pkxn.png",
+            "provider_id": 2077,
+            "provider_name": "Plex Channel",
+            "display_priority": 127
+        },
+        {
+            "logo_path": "/9dEuvA8wg5TSeFBZlPxSVxFdimJ.png",
+            "provider_id": 73,
+            "provider_name": "Tubi TV",
+            "display_priority": 346
+        }
+    ],
+    "buy": [
+        {
+            "logo_path": "/jn6TLbtaTZntTRX9UYucHJvpQx1.png",
+            "provider_id": 10,
+            "provider_name": "Amazon Video",
+            "display_priority": 8
+        },
+        {
+            "logo_path": "/qdEGArH3lKfFnAtYXMkSYk5wxuG.png",
+            "provider_id": 2,
+            "provider_name": "Apple TV Store",
+            "display_priority": 9
+        },
+        {
+            "logo_path": "/aZRENwYILujqs0RVOZutTh0BVGV.png",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies",
+            "display_priority": 20
+        }
+    ],
+    "free": [
+        {
+            "logo_path": "/6qPtM96UZkt3Bu4ZFPsDeHFWUZ2.png",
+            "provider_id": 486,
+            "provider_name": "Spectrum On Demand",
+            "display_priority": 119
+        }
+    ]
+}

@@ -1,0 +1,71 @@
+{
+    "link": "https://www.themoviedb.org/movie/776501-we-re-all-going-to-the-world-s-fair/watch?locale=US",
+    "free": [
+        {
+            "logo_path": "/cltb8XKan9ierp23ItPmCOcVLRa.png",
+            "provider_id": 191,
+            "provider_name": "Kanopy",
+            "display_priority": 35
+        },
+        {
+            "logo_path": "/gtjNBzAoGgUtYzt0UKXmwG34WWL.png",
+            "provider_id": 212,
+            "provider_name": "Hoopla",
+            "display_priority": 36
+        }
+    ],
+    "flatrate": [
+        {
+            "logo_path": "/k7iSlvgWzZuO4zU5PcBjhABMuia.png",
+            "provider_id": 11,
+            "provider_name": "MUBI",
+            "display_priority": 56
+        },
+        {
+            "logo_path": "/w1hl8HszsPf5aAGT0mVY0O6LYP4.png",
+            "provider_id": 201,
+            "provider_name": "MUBI Amazon Channel",
+            "display_priority": 85
+        }
+    ],
+    "rent": [
+        {
+            "logo_path": "/jn6TLbtaTZntTRX9UYucHJvpQx1.png",
+            "provider_id": 10,
+            "provider_name": "Amazon Video",
+            "display_priority": 8
+        },
+        {
+            "logo_path": "/qdEGArH3lKfFnAtYXMkSYk5wxuG.png",
+            "provider_id": 2,
+            "provider_name": "Apple TV Store",
+            "display_priority": 9
+        },
+        {
+            "logo_path": "/wpOt6x0dRxTrIzuBosto4LGd7E9.png",
+            "provider_id": 7,
+            "provider_name": "Fandango At Home",
+            "display_priority": 37
+        }
+    ],
+    "buy": [
+        {
+            "logo_path": "/jn6TLbtaTZntTRX9UYucHJvpQx1.png",
+            "provider_id": 10,
+            "provider_name": "Amazon Video",
+            "display_priority": 8
+        },
+        {
+            "logo_path": "/qdEGArH3lKfFnAtYXMkSYk5wxuG.png",
+            "provider_id": 2,
+            "provider_name": "Apple TV Store",
+            "display_priority": 9
+        },
+        {
+            "logo_path": "/wpOt6x0dRxTrIzuBosto4LGd7E9.png",
+            "provider_id": 7,
+            "provider_name": "Fandango At Home",
+            "display_priority": 37
+        }
+    ]
+}

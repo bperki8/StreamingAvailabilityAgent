@@ -1,0 +1,63 @@
+{
+    "link": "https://www.themoviedb.org/tv/46973-plebs/watch?locale=US",
+    "ads": [
+        {
+            "logo_path": "/blAEhvx3XX8sV0fFVFk88FFjubs.png",
+            "provider_id": 538,
+            "provider_name": "Plex",
+            "display_priority": 124
+        },
+        {
+            "logo_path": "/1gC0K43JMyMtVpqczxvwBp0pkxn.png",
+            "provider_id": 2077,
+            "provider_name": "Plex Channel",
+            "display_priority": 127
+        },
+        {
+            "logo_path": "/fuVBtr57kxnYzOILZ38xqSmBeyR.png",
+            "provider_id": 613,
+            "provider_name": "Amazon Prime Video Free with Ads",
+            "display_priority": 140
+        },
+        {
+            "logo_path": "/9dEuvA8wg5TSeFBZlPxSVxFdimJ.png",
+            "provider_id": 73,
+            "provider_name": "Tubi TV",
+            "display_priority": 346
+        },
+        {
+            "logo_path": "/46U3TOB3PhVDjA7qaFOuYSaGMiq.png",
+            "provider_id": 1898,
+            "provider_name": "Amazon MX Player",
+            "display_priority": 380
+        }
+    ],
+    "free": [
+        {
+            "logo_path": "/dNF4vWhF3TduWvOyfVxEyTqSNRl.png",
+            "provider_id": 2409,
+            "provider_name": "Fawesome",
+            "display_priority": 143
+        }
+    ],
+    "flatrate": [
+        {
+            "logo_path": "/gMZdpavHmxFNnLpMHwVxfqeux2g.png",
+            "provider_id": 9,
+            "provider_name": "Amazon Prime Video",
+            "display_priority": 3
+        },
+        {
+            "logo_path": "/3wF8xISfVlcrc8X3jaa3uMUFGAr.png",
+            "provider_id": 257,
+            "provider_name": "fuboTV",
+            "display_priority": 10
+        },
+        {
+            "logo_path": "/tpwTT1FpWqLLhxUfAuDavIXDDfI.png",
+            "provider_id": 2100,
+            "provider_name": "Amazon Prime Video with Ads",
+            "display_priority": 201
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "link": "https://www.themoviedb.org/tv/126766-dinosaur/watch?locale=US",
+    "flatrate": [
+        {
+            "logo_path": "/44uAnmSqvA4yBOdbPWN8YgQHjWm.png",
+            "provider_id": 15,
+            "provider_name": "Hulu",
+            "display_priority": 6
+        }
+    ]
+}

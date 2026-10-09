@@ -1,0 +1,17 @@
+{
+    "link": "https://www.themoviedb.org/tv/2912-jeopardy/watch?locale=US",
+    "flatrate": [
+        {
+            "logo_path": "/44uAnmSqvA4yBOdbPWN8YgQHjWm.png",
+            "provider_id": 15,
+            "provider_name": "Hulu",
+            "display_priority": 6
+        },
+        {
+            "logo_path": "/mfbhzQwmQKjm7bLZPF5CTeu3Ilc.png",
+            "provider_id": 2383,
+            "provider_name": "Philo",
+            "display_priority": 17
+        }
+    ]
+}
