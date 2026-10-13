@@ -1,6 +1,6 @@
 # Streaming Availability Agent and Test Harness
 
-A simple RAG (Retrieval-Augmented Generation) agent that uses a local llm to answer questions about where to stream movies and TV shows along with a test harness for evaluating performance. The agent itself is very simple, but the main value is in the test harness used to ensure the proper grounding of results -- which is especially important in the streaming domain where providers for a specific piece of media change often -- and in the potential LLM-powered metrics discussed in the [Future Work](#future-work) section.
+A simple RAG (Retrieval-Augmented Generation) agent that uses a local LLM to answer questions about where to stream movies and TV shows. The agent itself is very simple, but the main value is in the test harness used to ensure the proper grounding of results -- which is especially important in the streaming domain where providers for a specific piece of media change often -- and in the potential LLM-powered metrics discussed in the [Future Work](#future-work) section.
 
 # Table of Contents <!-- omit in toc -->
 - [Streaming Availability Agent and Test Harness](#streaming-availability-agent-and-test-harness)
