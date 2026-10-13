@@ -13,7 +13,7 @@ The Streaming Availability Agent uses the `qwen3:4b` local llm through `ollama`.
 1. Download and install [ollama](https://ollama.com/download).
 1. Run the `qwen3:4b` model locally using the command `ollama run qwen3:4b`.
 1. Check that the config at [`config/agent_config.json`](config/agent_config.json) is accurate -- see [Agent Config](#agent-config) for expected values.
-1. Run the agent as a python script with the command `python streaming_availability.py`.
+1. Run the agent with the command `python streaming_availability.py`.
 
 ### Agent Config
 
@@ -70,7 +70,7 @@ Each row of the `expected` column should contain sub-strings that are expected t
 
 #### Setup/Run
 
-1. Run at least one experiment as described in [`run_utterances.py`](#run_utterancespy) above.
+1. Run at least one experiment as described in [the `run_utterances.py` section](#run_utterancespy) above.
 1. Run the script from the root of this repo -- and provide a name for the result file produced by step one if not the default -- using the command `python -m testing.deterministic_metrics -r "example_experiment.tsv"`.
 1. Pairwise results for each utterance will be output in the `testing/results/deterministic/results` directory in a `.tsv` file named using the same name as the provided results file (warning: this will overwrite any existing results file with the same name).
 1. A scorecard with cumulative results and statistical analysis will be output in the `testing/results/deterministic/scorecards` directory in a `.tsv` file named using the same name as the provided results file (warning: this will overwite any existing scorecard file with the same name).
@@ -97,7 +97,7 @@ The `metric` column contains the name of the metric being compared, either the `
 
 The `*value` columns contain the total number of missing urls or providers for the entire dataset.
 
-The `difference` column contains the result of subtracting the control value from the treatment value. A negative difference indicates that the treatment config is improving the given metric while a positive difference indicates that the treatment config is making it worse.
+The `difference` column contains the result of subtracting the control value from the treatment value. For the missing URL and missing provider metrics, a negative difference (less misses) indicates that the treatment config is improving the given metric while a positive difference (more misses) indicates that the treatment config is making it worse.
 
 The `stat` column contains the Wilcoxon test statistic. In this case it's using a two-sided test, so that's the sum of the ranks of the differences above or below zero -- whichever is smaller.
 
