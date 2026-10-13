@@ -8,10 +8,12 @@ The Streaming Availability Agent runs using the `qwen3:4b` local llm through `ol
 
 ### Setup / Run
 
+1. Request a TMDB API Key at https://www.themoviedb.org/settings/api/request.
+1. Add that to your `.env` file as shown in [.env.example](.env.example).
 1. Download and install [ollama](https://ollama.com/download).
-2. Run the `qwen3:4b` model locally using the command `ollama run qwen3:4b`.
-3. Check that the config at `config/agent_config.json` is accurate -- see [Agent Config](#agent-config) for expected values.
-4. Run the agent as a python script with the command `python streaming_availability.py`.
+1. Run the `qwen3:4b` model locally using the command `ollama run qwen3:4b`.
+1. Check that the config at `config/agent_config.json` is accurate -- see [Agent Config](#agent-config) for expected values.
+1. Run the agent as a python script with the command `python streaming_availability.py`.
 
 ### Agent Config
 
@@ -36,11 +38,11 @@ The test harness consists of two python scripts: `run_utterances.py` and `determ
 #### Setup/Run
 
 1. Download and install [ollama](https://ollama.com/download).
-2. Run the `qwen3:4b` model locally using the command `ollama run qwen3:4b`.
-3. Create an experiment config in `testing/configs` -- see [Experiment Config](#experiment-config) for expected format -- or use the default config in `example_experiment.json`.
-4. Create a dataset in `testing/datasets` -- see [Dataset](#dataset) for expected format -- or use the default dataset in `golden_set.tsv`.
-5. Run the script from the root of this repo and provide names for your dataset and experiment config as necessary using the command `python -m testing.run_utterances -d "golden_set.tsv" -c "example_experiment.json"`
-6. Results will be output to `testing/results` in a `.tsv` file named using the same name as the provided experiment config (warning: this will overwrite any existing results file with the same name).
+1. Run the `qwen3:4b` model locally using the command `ollama run qwen3:4b`.
+1. Create an experiment config in `testing/configs` -- see [Experiment Config](#experiment-config) for expected format -- or use the default config in `example_experiment.json`.
+1. Create a dataset in `testing/datasets` -- see [Dataset](#dataset) for expected format -- or use the default dataset in `golden_set.tsv`.
+1. Run the script from the root of this repo and provide names for your dataset and experiment config as necessary using the command `python -m testing.run_utterances -d "golden_set.tsv" -c "example_experiment.json"`
+1. Results will be output to `testing/results` in a `.tsv` file named using the same name as the provided experiment config (warning: this will overwrite any existing results file with the same name).
 
 #### Experiment Config
 
@@ -65,9 +67,9 @@ Each row of the `expected` column should contain specific sub-strings that are e
 #### Setup/Run
 
 1. Run at least one experiment as described in [`run_utterances.py`](#run_utterancespy) above.
-2. Run the script from the root of this repo and provide a name for the result file produced by step 1 using the command `python -m testing.deterministic_metrics -r "example_experiment.tsv"` (note: if no `-r` parameter is included, the script will use `example_experiment.tsv` by default).
-3. Pairwise results for each utterance will be output in the `testing/results/deterministic/results` directory in a `.tsv` file named using the same name as the provided results file (warning: this will overwrite any existing results file with the same name).
-4. A scorecard with cumulative results and statistical analysis will be output in the `testing/results/deterministic/scorecards` directory in `.tsv` file named using the same name as the provided results file (warning: this will overwite any existing scorecard file with the same name).
+1. Run the script from the root of this repo and provide a name for the result file produced by step 1 using the command `python -m testing.deterministic_metrics -r "example_experiment.tsv"` (note: if no `-r` parameter is included, the script will use `example_experiment.tsv` by default).
+1. Pairwise results for each utterance will be output in the `testing/results/deterministic/results` directory in a `.tsv` file named using the same name as the provided results file (warning: this will overwrite any existing results file with the same name).
+1. A scorecard with cumulative results and statistical analysis will be output in the `testing/results/deterministic/scorecards` directory in `.tsv` file named using the same name as the provided results file (warning: this will overwite any existing scorecard file with the same name).
 
 #### Pairwise Results Structure
 
