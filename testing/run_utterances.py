@@ -7,10 +7,19 @@ from datetime import datetime
 
 start_time = datetime.now()
 
-# TODO: Grab this stuff from the user.
-config_name = "example_experiment.json"
+parser = argparse.ArgumentParser(
+    description="Simples test harness for the Streaming Availability Agent used to run multiple utterances from a .tsv file."
+)
+
+parser.add_argument("-c", "--config", type=str, help="Name of the config to use for the experiment.", default="example_experiment.json")
+parser.add_argument("-d", "--dataset", type=str, help="Name of the file containging the dataset.", default="golden_set.tsv")
+
+args = parser.parse_args()
+
+config_name = args.config
 config_file = f"testing/configs/{config_name}"
-dataset_file = "testing/datasets/golden_set.tsv"
+dataset_name = args.dataset
+dataset_file = f"testing/datasets/{dataset_name}"
 output_file = f"testing/results/{config_name[:-5]}.tsv"
 
 modified_rows = []
@@ -44,6 +53,7 @@ with open(dataset_file, mode='r', encoding='utf-8', newline='') as infile:
         treatment_result = streaming_availability.main(treatment_config_overrides, user_utterance)
 
         utterance_urls_providers = row[:3]
+        # TODO: This only takes the content of the final message right now. If we want more have to be smarter.
         utterance_urls_providers.append(control_result[-1]["content"].encode())
         utterance_urls_providers.append(treatment_result[-1]["content"].encode())
 

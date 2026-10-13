@@ -200,6 +200,7 @@ def main(config_overrides={}, utterance=None) -> list[dict]:
         print("\n===========\n")
         messages.append({'role': 'user', 'content': user_message})
         while True:
+            # TODO: Get the model name from config.
             response: ChatResponse = chat(
                 model='qwen3:4b',
                 messages=messages,

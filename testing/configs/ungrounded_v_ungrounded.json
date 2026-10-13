@@ -1,0 +1,11 @@
+{
+  "experiment_name": "Ungrounded v. Ungrounded",
+  "control_config_overrides": {
+    "disable_grounding": true,
+    "system_prompt": "prompts/system_prompt_no_tools.md"
+  },
+  "treatment_config_overrides": {
+    "disable_grounding": true,
+    "system_prompt": "prompts/system_prompt_no_tools.md"
+  }
+}

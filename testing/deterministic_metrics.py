@@ -1,3 +1,4 @@
+import argparse
 import csv
 import json
 
@@ -18,13 +19,22 @@ def conclusion_string(p_value, alpha=0.05) -> str:
 
 start_time = datetime.now()
 
-# TODO: Get the result file name from the user. Should be able to do this now that main is run from config.
-results_file = "testing/results/example_experiment.tsv"
-scorecard_file = "testing/scorecards/example_experiment.tsv"
+parser = argparse.ArgumentParser(
+    description="Calculate deterministic metrics for a completed dataset run."
+)
+
+parser.add_argument("-r", "--results", type=str, help="Name of the results file to use as input.", default="example_experiment.tsv")
+
+args = parser.parse_args()
+
+results_file_name = args.results
+input_file = f"testing/results/{results_file_name}"
+results_file = f"testing/results/deterministic/results/{results_file_name}"
+scorecard_file = f"testing/results/deterministic/scorecards/{results_file_name}"
 
 modified_rows = []
 
-with open(results_file, mode='r', encoding='utf-8', newline='') as infile:
+with open(input_file, mode='r', encoding='utf-8', newline='') as infile:
     reader = csv.reader(infile, delimiter='\t')
     
     header = next(reader)
