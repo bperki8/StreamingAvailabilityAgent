@@ -2,6 +2,21 @@
 
 A simple RAG (Retrieval-Augmented Generation) agent that uses a local llm to answer questions about where to stream movies and TV shows -- along with a test harness for evaluating performance.
 
+# Table of Contents <!-- omit in toc -->
+- [Streaming Availability Agent and Test Harness](#streaming-availability-agent-and-test-harness)
+  - [Streaming Availability Agent](#streaming-availability-agent)
+    - [Setup / Run](#setup--run)
+    - [Agent Config](#agent-config)
+  - [Test Harness](#test-harness)
+    - [`run_utterances.py`](#run_utterancespy)
+      - [Setup / Run](#setup--run-1)
+      - [Experiment Config](#experiment-config)
+      - [Dataset](#dataset)
+    - [`deterministic_metrics.py`](#deterministic_metricspy)
+      - [Setup / Run](#setup--run-2)
+      - [Pairwise Results Structure](#pairwise-results-structure)
+      - [Statistical Analysis and Scorecard Structure](#statistical-analysis-and-scorecard-structure)
+
 ## Streaming Availability Agent
 
 The Streaming Availability Agent uses the `qwen3:4b` local llm through `ollama`. It can be run with or without the RAG system enabled. With RAG enabled, the agent has tools available to query the TMDB (The Movie Database) API for up-to-date streaming providers.
@@ -35,7 +50,7 @@ The test harness consists of two python scripts: [`run_utterances.py`](testing/r
 
 [`run_utterances.py`](testing/run_utterances.py) is used to invoke the Streaming Availability Agent across a list of user utterances (in `.tsv` format) using two separate agent configs (one for control and one for treatment). The final agent responses are recorded and saved for later evaluation/comparison. (Note: We only keep the final chat response currently, but this could easily be upgraded to include tool calls and results as well.)
 
-#### Setup/Run
+#### Setup / Run
 
 1. Request a TMDB API Key at https://www.themoviedb.org/settings/api/request.
 1. Add that to your `.env` file as shown in [.env.example](.env.example).
@@ -64,11 +79,11 @@ Each row of the `urls` column should contain a list of URLs that the model is ex
 
 Each row of the `expected` column should contain sub-strings that are expected to be found in the model's (lowercased) response. In the case of this agent, we're using it to list specific streaming providers that the model is expected to mention.
 
-### `deterministic_metrics.py
+### `deterministic_metrics.py`
 
 [`deterministic_metrics.py`](testing/deterministic_metrics.py) takes the results of a `run_utterances.py` run and, based on the expected URLs and streaming providers, calculates the number of misses for each metric and whether any differences are statistically significant.
 
-#### Setup/Run
+#### Setup / Run
 
 1. Run at least one experiment as described in [the `run_utterances.py` section](#run_utterancespy) above.
 1. Run the script from the root of this repo -- and provide a name for the result file produced by step one if not the default -- using the command `python -m testing.deterministic_metrics -r "example_experiment.tsv"`.
