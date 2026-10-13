@@ -16,6 +16,7 @@ A simple RAG (Retrieval-Augmented Generation) agent that uses a local llm to ans
       - [Setup / Run](#setup--run-2)
       - [Pairwise Results Structure](#pairwise-results-structure)
       - [Statistical Analysis and Scorecard Structure](#statistical-analysis-and-scorecard-structure)
+- [Future Work](#future-work)
 
 ## Streaming Availability Agent
 
@@ -35,7 +36,7 @@ The Streaming Availability Agent uses the `qwen3:4b` local llm through `ollama`.
 The following properties can be set in the [agent config JSON](config/agent_config.json).
 
 - `disable_cached_data` (default `False`): By default, the model cache's API responses from TMDB instead of querying the service live. This is great for demo / testing purposes, because it keeps the source of truth pinned to a known baseline, but it should be set to `True` in production to ensure that the model is using the most up-to-date information -- streaming availability changes often.
-- `disable_grounding` (default: `False`): Disables the search tools used to query the TMDB API, without which the model can only answer from it's internal knowledge at training time.
+- `disable_grounding` (default: `False`): Disables the search tools used to query the TMDB API, without which the model can only answer from its internal knowledge at training time.
 - `multi_turn` (default: `False`): Allows multi-turn conversations (with more than one user input utterance) when enabled.
 - `show_thinking` (default `False`): If enabled, prints the model's chain of thought when present in the outputs. (Useful for debugging.)
 - `show_tool_calls` (default `False`): If enabled, prints the actual tool calls (tool name and input parameters) and results when present. (Useful for debugging.)
@@ -65,7 +66,7 @@ The test harness consists of two python scripts: [`run_utterances.py`](testing/r
 
 See [example_experiment.json](testing/configs/example_experiment.json) for an example. (Note that the optional `experiment_name` parameter is not currently used by the scripts, it's just there for bookkeeping.)
 
-The experiment config is a JSON file with two required properties: `control_config_overrides` and `treatment_config_overrides`. Both are expected to be a JSON dictionary containing only the properties from the agent config that should be changed compared to the default config at [`configs/agent_config.json`](config/agent_config.json). If you would like either arm (control or treatment) to use the exact default config, simply provide an empty JSON dictionary `{}`.
+The experiment config is a JSON file with two required properties: `control_config_overrides` and `treatment_config_overrides`. Both are expected to be a JSON dictionary containing only the properties from the agent config that should be overridden compared to the default config at [`configs/agent_config.json`](config/agent_config.json). If you would like either arm (control or treatment) to use the exact default config, simply provide an empty JSON dictionary `{}`.
 
 #### Dataset
 
@@ -75,9 +76,9 @@ Datasets must consist of a `.tsv` file with three columns: `utterances`, `urls`,
 
 Each row of the `utterances` column should contain a single user utterance used to test both the control and treatment configs.
 
-Each row of the `urls` column should contain a list of URLs that the model is expected to include as citations in its final response for that utterance. An empty list can be provided `[]` or a list containing one or more quoted URL strings. These are used in a sub-string match, so you should provide the shortest acceptable URL (e.g., "https://www.themoviedb.org/tv/2352-the-nanny" instead of "https://www.themoviedb.org/tv/2352-the-nanny/watch?translate=false&locale=US" unless you want to specifically ensure that the model is including the "watch?translate=false&locale=US" part in the final response).
+Each row of the `urls` column should contain a list of quoted URL strings that the model is expected to include as citations in its final response for that utterance. An empty list can be provided `[]` or a list containing one or more quoted URL strings. These are used in a sub-string match, so you should provide the shortest acceptable URL (e.g., "https://www.themoviedb.org/tv/2352-the-nanny" instead of "https://www.themoviedb.org/tv/2352-the-nanny/watch?translate=false&locale=US" unless you want to specifically ensure that the model is including the "watch?translate=false&locale=US" part in the final response).
 
-Each row of the `expected` column should contain sub-strings that are expected to be found in the model's (lowercased) response. In the case of this agent, we're using it to list specific streaming providers that the model is expected to mention.
+Each row of the `expected` column should contain a list of quoted sub-strings that are expected to be found in the model's (lowercased) response. In the case of this agent, we're using it to list specific streaming providers that the model is expected to mention.
 
 ### `deterministic_metrics.py`
 
@@ -119,3 +120,10 @@ The `stat` column contains the Wilcoxon test statistic. In this case it's using 
 The `p-value` column contains the probability of obtaining test results at least as extreme as the result actually observed, under the assumption that the null hypothesis is correct.
 
 The `conclusion` section contains one of two strings: `stat-sig` or `noise`. If the p-value for a given metric is less than 0.05, the result is considered statistically significant. If the p-value is greater than or equal to 0.05, it's likely that the difference is caused by statistical noise, and this metric should not be taken as a strong signal either way.
+
+# Future Work
+- Only the final chat response is stored by `run_utterances.py`. If we update it to include the tool calls and results, that can be used for further evaluation. This would be useful with a complex agent that has more tools available, but with the simple Streaming Availability Agent here that uses only two tools, the ROI doesn't justify the expense.
+- Similarly, only simple deterministic metrics are currently calculated (based on a baseline truth of specific expected URLs and provider sub-strings). For more complex agents in domains with a wider variety of potential grounding sources, we could also implement a separate script to run LLM powered metrics that measure dimensions such as the overall structure and content of the final response; the number, importance, and veracity of claims made per response; or the accuracy of citations -- whether or not they actually support a given claim.
+- Currently, `run_utterances.py` simply runs each utterance -- on control then treatment -- in sequence. With a large dataset, that can take a long time. This could be sped up by parallelizing model calls (both across control and treatment and across utterances). Cacheing model calls could save compute time and tokens, but it's not recommended, because the model response is exactly what we're testing here.
+- These scripts would benefit from user-proofing such as confirming that the datasets and results files are formatted correctly before running or such as warning the user that new files will replace old files if one with the same name already exists and confirming that they want to do that.
+- This is all done through the command line. Separate UIs would be useful for interacting with the agent and viewing existing conversations, setting up experiment configs, and analyzing experiment results / scorecards.
