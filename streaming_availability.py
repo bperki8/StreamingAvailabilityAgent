@@ -1,14 +1,15 @@
 """
 TMDB API Documentation: https://developer.themoviedb.org/reference/getting-started
 """
-import os
 import hashlib
 import json
+import os
 import tmdbsimple as tmdb
 
+
+from dotenv import load_dotenv
 from ollama import chat, ChatResponse
 from pathlib import Path
-from dotenv import load_dotenv
 
 load_dotenv()
 
