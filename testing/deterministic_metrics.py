@@ -18,7 +18,7 @@ def conclusion_string(p_value, alpha=0.05) -> str:
 
 start_time = datetime.now()
 
-# TODO: Get the result file name from the user.
+# TODO: Get the result file name from the user. Should be able to do this now that main is run from config.
 results_file = "testing/results/example_experiment.tsv"
 scorecard_file = "testing/scorecards/example_experiment.tsv"
 
@@ -40,8 +40,12 @@ with open(results_file, mode='r', encoding='utf-8', newline='') as infile:
 
     control_missing_url_counts = []
     treatment_missing_url_counts = []
+    control_missing_url_total = 0
+    treatment_missing_url_total = 0
     control_missing_provider_counts = []
     treatment_missing_provider_counts = []
+    control_missing_provider_total = 0
+    treatment_missing_provider_total = 0
 
     for row in reader:
         control_result = row[3]
@@ -65,6 +69,8 @@ with open(results_file, mode='r', encoding='utf-8', newline='') as infile:
         row.append(missing_urls_treatment)
         row.append(num_missing_control)
         row.append(num_missing_treatment)
+        control_missing_url_total += num_missing_control
+        treatment_missing_url_total += num_missing_treatment
         control_missing_url_counts.append(num_missing_control)
         treatment_missing_url_counts.append(num_missing_treatment)
 
@@ -84,6 +90,8 @@ with open(results_file, mode='r', encoding='utf-8', newline='') as infile:
         row.append(missing_providers_treatment)
         row.append(num_missing_control)
         row.append(num_missing_treatment)
+        control_missing_provider_total += num_missing_control
+        treatment_missing_provider_total += num_missing_treatment
         control_missing_provider_counts.append(num_missing_control)
         treatment_missing_provider_counts.append(num_missing_treatment)
 
@@ -100,57 +108,22 @@ with open(results_file, mode='w', encoding='utf-8', newline='') as outfile:
 
 with open(scorecard_file, mode='w', encoding='utf-8', newline='') as scorefile:
     writer = csv.writer(scorefile, delimiter='\t')
-    rows = [["metric", "stat", "p-value", "conclusion"]]
+    rows = [["metric", "control_value", "treatment_value", "difference", "stat", "p-value", "conclusion"]]
 
+    # gonna go with the wilcoxon instead of the mann whitney u test, because wilcoxon is for paired data and mann whitney u is for independent data.
+    # the fact that these are control and treatment for the same user utterance makes it paired data, not independent.
+    
     # missing_urls
     stat, p_value = wilcoxon(control_missing_url_counts, treatment_missing_url_counts)
     conclusion = conclusion_string(p_value)
-    rows.append(["missing_urls_wilcoxon", stat, p_value, conclusion])
-
-    stat, p_value = wilcoxon(control_missing_url_counts, treatment_missing_url_counts, alternative="less")
-    conclusion = conclusion_string(p_value)
-    rows.append(["missing_urls_wilcoxon_less", stat, p_value, conclusion])
-
-    stat, p_value = wilcoxon(control_missing_url_counts, treatment_missing_url_counts, alternative="greater")
-    conclusion = conclusion_string(p_value)
-    rows.append(["missing_urls_wilcoxon_greater", stat, p_value, conclusion])
-
-    stat, p_value = mannwhitneyu(control_missing_url_counts, treatment_missing_url_counts)
-    conclusion = conclusion_string(p_value)
-    rows.append(["missing_urls_mannwhitneyu", stat, p_value, conclusion])
-
-    stat, p_value = mannwhitneyu(control_missing_url_counts, treatment_missing_url_counts, alternative="less")
-    conclusion = conclusion_string(p_value)
-    rows.append(["missing_urls_mannwhitneyu_less", stat, p_value, conclusion])
-
-    stat, p_value = mannwhitneyu(control_missing_url_counts, treatment_missing_url_counts, alternative="greater")
-    conclusion = conclusion_string(p_value)
-    rows.append(["missing_urls_mannwhitneyu_greater", stat, p_value, conclusion])
+    diff = treatment_missing_url_total - control_missing_url_total
+    rows.append(["missing_urls", control_missing_url_total, treatment_missing_url_total, diff, stat, p_value, conclusion])
 
     # missing_providers
     stat, p_value = wilcoxon(control_missing_provider_counts, treatment_missing_provider_counts)
     conclusion = conclusion_string(p_value)
-    rows.append(["missing_providers_wilcoxon", stat, p_value, conclusion])
-
-    stat, p_value = wilcoxon(control_missing_provider_counts, treatment_missing_provider_counts, alternative="less")
-    conclusion = conclusion_string(p_value)
-    rows.append(["missing_providers_wilcoxon_less", stat, p_value, conclusion])
-
-    stat, p_value = wilcoxon(control_missing_provider_counts, treatment_missing_provider_counts, alternative="greater")
-    conclusion = conclusion_string(p_value)
-    rows.append(["missing_providers_wilcoxon_greater", stat, p_value, conclusion])
-    
-    stat, p_value = mannwhitneyu(control_missing_provider_counts, treatment_missing_provider_counts)
-    conclusion = conclusion_string(p_value)
-    rows.append(["missing_providers_mannwhitneyu", stat, p_value, conclusion])
-
-    stat, p_value = mannwhitneyu(control_missing_provider_counts, treatment_missing_provider_counts, alternative="less")
-    conclusion = conclusion_string(p_value)
-    rows.append(["missing_providers_mannwhitneyu_less", stat, p_value, conclusion])
-
-    stat, p_value = mannwhitneyu(control_missing_provider_counts, treatment_missing_provider_counts, alternative="greater")
-    conclusion = conclusion_string(p_value)
-    rows.append(["missing_providers_mannwhitneyu_greater", stat, p_value, conclusion])
+    diff = treatment_missing_provider_total - control_missing_provider_total
+    rows.append(["missing_providers", control_missing_provider_total, treatment_missing_provider_total, diff, stat, p_value, conclusion])
 
     writer.writerows(rows)
 
